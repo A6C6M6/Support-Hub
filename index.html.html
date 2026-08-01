@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Hub - Public Portal</title>
+    
+    <!-- CSS Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-hover: #1e40af;
+            --secondary-bg: #f8fafc;
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #94a3b8;
+            --sidebar-active: #38bdf8;
+            --card-border: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --header-height: 70px;
+            --sidebar-width: 260px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-bg);
+            color: var(--text-dark);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-brand {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-brand i {
+            color: var(--sidebar-active);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 1.5rem 0.75rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu li.active a {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--sidebar-active);
+        }
+
+        /* Main Content Styling */
+        .main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Dynamic Header */
+        .header {
+            height: var(--header-height);
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .header-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-search {
+            position: relative;
+        }
+
+        .header-search input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            outline: none;
+            width: 250px;
+        }
+
+        .header-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #e2e8f0;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #cbd5e1;
+        }
+
+        /* Page Content Area */
+        .content-body {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        /* Grid System for Modules */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .live-badge {
+            background-color: #dcfce7;
+            color: #15803d;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Support Hub</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu" id="sidebarMenu">
+            <!-- Dynamic Sidebar Items -->
+        </ul>
+    </aside>
+
+    <!-- Main App Container -->
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-area" id="headerLeftArea"></div>
+            <div class="header-area" id="headerCenterArea"></div>
+            <div class="header-area" id="headerRightArea"></div>
+        </header>
+
+        <!-- Main Body Area -->
+        <main class="content-body" id="mainContent">
+            <!-- Dynamic Page Content Loaded Here -->
+        </main>
+    </div>
+
+    <script>
+        // Default Config (Fallback)
+        const initialDefaultConfig = {
+            headerItems: [
+                { id: "search", order: 1, position: "left", show: true, type: "search" },
+                { id: "lang", order: 2, position: "right", show: true, type: "language" },
+                { id: "profile", order: 3, position: "right", show: true, type: "profile" }
+            ],
+            sidebar: {
+                "dashboard": { order: 1, nameEn: "Dashboard", nameMl: "ഡാഷ്‌ബോർഡ്", icon: "fa-house", show: true, enable: true, modules: [] }
+            }
+        };
+
+        let currentLanguage = 'en';
+        let activePageKey = 'dashboard';
+
+        // =========================================================================
+        // SUPABASE CONNECTION CONFIGURATION
+        // =========================================================================
+        const SUPABASE_URL = 'https://qhcxxzjibfzjkrpskjjj.supabase.co/rest/v1/'; // നിങ്ങളുടെ Project URL നൽകുക
+        const SUPABASE_KEY = 'sb_publishable_dLXC9Vp7BaBxYRz153pq0Q_b1qWG4xV';                      // നിങ്ങളുടെ Anon Key നൽകുക
+        
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // =========================================================================
+        // READ DATA FROM SUPABASE
+        // =========================================================================
+        async function getSavedConfig() {
+            try {
+                let { data, error } = await _supabase
+                    .from('app_config')
+                    .select('config_data')
+                    .eq('id', 1)
+                    .single();
+
+                if (error || !data) {
+                    console.warn("Supabase fetch failed or empty.", error);
+                    return initialDefaultConfig;
+                }
+                return data.config_data;
+            } catch (err) {
+                console.error("Error fetching config:", err);
+                return initialDefaultConfig;
+            }
+        }
+
+        // =========================================================================
+        // REAL-TIME AUTO SYNC (ADMIN പേജിലെ മാറ്റങ്ങൾ തത്സമയം സിങ്ക് ചെയ്യുന്നു)
+        // =========================================================================
+        _supabase
+            .channel('public:app_config')
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'app_config' }, async (payload) => {
+                console.log('Real-time sync update received on Public Portal:', payload);
+                await syncUIFromConfig();
+                loadPageContent(activePageKey);
+            })
+            .subscribe();
+
+        // =========================================================================
+        // UI RENDERING FUNCTIONS
+        // =========================================================================
+        async function syncUIFromConfig() {
+            const cfg = await getSavedConfig();
+            renderHeader(cfg.headerItems || initialDefaultConfig.headerItems);
+            renderSidebar(cfg.sidebar || initialDefaultConfig.sidebar);
+        }
+
+        function renderHeader(headerItems) {
+            const left = document.getElementById('headerLeftArea');
+            const center = document.getElementById('headerCenterArea');
+            const right = document.getElementById('headerRightArea');
+
+            left.innerHTML = ''; center.innerHTML = ''; right.innerHTML = '';
+
+            const items = [...headerItems].sort((a,b) => a.order - b.order);
+
+            items.forEach(item => {
+                if(!item.show) return;
+                let elem = document.createElement('div');
+                
+                if(item.type === 'search') {
+                    elem.className = 'header-search';
+                    elem.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search portal...">`;
+                } else if(item.type === 'language') {
+                    elem.innerHTML = `<button class="btn" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> ${currentLanguage.toUpperCase()}</button>`;
+                } else if(item.type === 'profile') {
+                    elem.className = 'user-profile';
+                    elem.innerHTML = `<div class="avatar"><i class="fa-solid fa-user"></i></div><span>Guest User</span>`;
+                }
+
+                if(item.position === 'left') left.appendChild(elem);
+                else if(item.position === 'center') center.appendChild(elem);
+                else right.appendChild(elem);
+            });
+        }
+
+        function renderSidebar(sidebarConfig) {
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            sidebarMenu.innerHTML = '';
+
+            const keys = Object.keys(sidebarConfig).sort((a, b) => sidebarConfig[a].order - sidebarConfig[b].order);
+
+            keys.forEach(key => {
+                const item = sidebarConfig[key];
+                if (item.show !== false) {
+                    const li = document.createElement('li');
+                    if (key === activePageKey) li.classList.add('active');
+
+                    const displayName = currentLanguage === 'ml' ? (item.nameMl || key) : (item.nameEn || key);
+                    li.innerHTML = `<a href="#" data-title="${key}"><i class="${item.icon || 'fa-solid fa-folder'}"></i> <span>${displayName}</span></a>`;
+                    
+                    li.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        activePageKey = key;
+                        document.querySelectorAll('#sidebarMenu li').forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        loadPageContent(key);
+                    });
+                    sidebarMenu.appendChild(li);
+                }
+            });
+        }
+
+        async function loadPageContent(pageKey) {
+            const cfg = await getSavedConfig();
+            const mainContent = document.getElementById('mainContent');
+            const pageData = cfg.sidebar[pageKey];
+
+            if(!pageData) {
+                mainContent.innerHTML = `<h2>Page Not Found</h2>`;
+                return;
+            }
+
+            let html = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+                <h2>${currentLanguage === 'ml' ? pageData.nameMl : pageData.nameEn}</h2>
+                <div class="live-badge">
+                    <span class="live-dot"></span> Live Synced
+                </div>
+            </div>`;
+
+            html += `<div class="modules-grid">`;
+            if(pageData.modules && pageData.modules.length > 0) {
+                pageData.modules.forEach(mod => {
+                    html += `
+                        <div class="module-card">
+                            <div class="module-icon" style="background:#e0f2fe; color:#0284c7;">
+                                <i class="${mod.icon}"></i>
+                            </div>
+                            <h3>${currentLanguage === 'ml' ? mod.nameMl : mod.nameEn}</h3>
+                        </div>
+                    `;
+                });
+            } else {
+                html += `<p style="color:var(--text-muted);">No services available under this section.</p>`;
+            }
+            html += `</div>`;
+
+            mainContent.innerHTML = html;
+        }
+
+        async function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ml' : 'en';
+            await syncUIFromConfig();
+            loadPageContent(activePageKey);
+        }
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', async () => {
+            await syncUIFromConfig();
+            loadPageContent(activePageKey);
+        });
+    </script>
+</body>
+</html>
