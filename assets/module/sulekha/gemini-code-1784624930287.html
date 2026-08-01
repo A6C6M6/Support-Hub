@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <title>Spillover Transfer Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 15mm;
+            background-color: #f7f9fa;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Meera Inimai', 'Gayathri', 'Manjari', 'Arial', sans-serif;
+            color: #2c3e50;
+            background-color: #f7f9fa;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .header {
+            background-color: #1b4f72;
+            color: #ffffff;
+            padding: 25px 20px;
+            margin: -20px -15px 30px -15px;
+            border-bottom: 4px solid #154360;
+        }
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .header p {
+            margin: 0;
+            font-size: 13px;
+            color: #d4e6f1;
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1b4f72;
+            border-left: 4px solid #2980b9;
+            padding-left: 10px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            page-break-after: avoid;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #d5dbdb;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #7f8c8d;
+            border-top: 1px solid #d5dbdb;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Spillover Transfer - പ്രോജക്റ്റുകൾ ലിസ്റ്റ് ചെയ്യാത്തതിന്റെ കാരണങ്ങളും പരിഹാരങ്ങളും</h1>
+        <p>K-SMART / Project Management System Guidelines</p>
+    </div>
+
+    <div class="section-title">പരിശോധിക്കേണ്ട പ്രധാന കാര്യങ്ങൾ (Points to Check)</div>
+    <div class="card">
+        <ul>
+            <li><strong>Multi-Year പ്രോജക്റ്റുകൾ:</strong> പ്രോജക്റ്റ് ഒരു Multi-Year പദ്ധതിയാണോ എന്ന് പരിശോധിക്കുക. (സർക്കാർ തീരുമാനപ്രകാരം തുകയ്ക്കുള്ള Validation ക്രമീകരണം ലഭിച്ച ശേഷം മാത്രമേ ഇവ ഉൾപ്പെടുത്തുകയുള്ളൂ).</li>
+            <li><strong>Health Grant പ്രോജക്റ്റുകൾ:</strong> പ്രോജക്റ്റ് Health Grant-ൽ ഉൾപ്പെട്ടതാണോ എന്ന് പരിശോധിക്കുക. (ഇതിനുള്ള പ്രത്യേക Validation ക്രമീകരണം ലഭിക്കേണ്ടതുണ്ട്).</li>
+            <li><strong>Treasury FC പ്രോജക്റ്റുകൾ:</strong> പ്രോജക്റ്റ് Treasury FC വിഭാഗത്തിൽപ്പെട്ടതാണോ എന്ന് പരിശോധിക്കുക.</li>
+            <li><strong>Detailed Search ചെയ്യുക:</strong> Search Tab-ൽ പ്രോജക്റ്റ് നമ്പർ (Project Number) നൽകി കൃത്യമായ Detailed Search നടത്തുക.</li>
+            <li><strong>Column പരിശോധന:</strong> ലഭിക്കുന്ന ലിസ്റ്റിലെ Column പരിശോധിച്ച്, <strong>"സ്പിൽ ഓവർ അധികവിഹിതത്തിൽ ഉൾപ്പെടുത്തിയിട്ടുള്ള പുതിയ പ്രോജക്ട് ആണോ?"</strong> എന്ന ഫീൽഡിൽ <strong>Yes</strong> എന്ന് രേഖപ്പെടുത്തിയിട്ടുള്ള പദ്ധതികൾ ഏതൊക്കെയെന്ന് പരിശോധിക്കുക.</li>
+        </ul>
+    </div>
+
+    <div class="section-title">വരുത്തേണ്ട മാറ്റങ്ങൾ (Required Changes)</div>
+    <div class="card">
+        <ul>
+            <li><strong>ബാധകമായവ ഉൾപ്പെടുത്തുക:</strong> മുകളിൽ പറഞ്ഞ പ്രത്യേക ഉപാധികളിൽ (Conditions) ഉൾപ്പെടാത്ത മറ്റ് എല്ലാ പദ്ധതികളും ഉടൻ തന്നെ Spillover Transfer-ൽ ഉൾപ്പെടുത്തുക.</li>
+            <li><strong>Validation ക്രമീകരണങ്ങൾ:</strong> സർക്കാർ നിർദ്ദേശപ്രകാരമുള്ള Validation ക്രമീകരണങ്ങൾ പൂർത്തിയായ ശേഷം, Multi-Year, Health Grant, Treasury FC തുടങ്ങിയ പ്രത്യേക വിഭാഗങ്ങളിൽ പെടുന്ന പദ്ധതികളും Spillover Transfer-ൽ ഉൾപ്പെടുത്തേണ്ടതാണ്.</li>
+            <li><strong>ആവശ്യമായ മാറ്റങ്ങൾ (Modifications):</strong> സിസ്റ്റത്തിൽ വരുത്തേണ്ട മറ്റ് ഭേദഗതികളും Modifications-ഉം കൃത്യമായി നടപ്പിലാക്കുക.</li>
+            <li><strong>അന്തിമ ഉറപ്പുവരുത്തൽ:</strong> എല്ലാ മാറ്റങ്ങളും പൂർത്തിയാക്കി, അർഹതപ്പെട്ട എല്ലാ പ്രോജക്റ്റുകളും Spillover Transfer-ൽ ശരിയായി ലിസ്റ്റ് ചെയ്യപ്പെടുന്നുണ്ടെന്നും ട്രാൻസ്ഫർ ആകുന്നുണ്ടെന്നും ഉറപ്പുവരുത്തുക.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        Generated automatically for K-SMART project management workflows.
+    </div>
+
+</body>
+</html>

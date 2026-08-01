@@ -1,0 +1,21 @@
+{
+  "moduleId": "spark",
+  "moduleName": "SPARK",
+  "fullName": "Service and Payroll Administrative Repository for Kerala",
+  "description": "Service and payroll administrative repository for Kerala LSGI employees.",
+  "category": "HR & Payroll",
+  "icon": "fa-chart-simple",
+  "themeColor": "#16a34a",
+  "bgTint": "#f0fdf4",
+  "folderPath": "assets/module/spark/",
+  "documentationPath": "assets/module/spark/docs/",
+  "targetPage": "assets/module/spark/pages/index.html",
+  "displayOrder": 2,
+  "status": "Published",
+  "permissions": [
+    "admin",
+    "staff"
+  ],
+  "createdDate": "2026-07-28",
+  "updatedDate": "2026-07-28"
+}

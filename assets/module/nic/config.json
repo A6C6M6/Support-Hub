@@ -1,0 +1,21 @@
+{
+  "moduleId": "nic",
+  "moduleName": "NIC",
+  "fullName": "National Informatics Centre Applications",
+  "description": "National Informatics Centre applications used by local self government institutions.",
+  "category": "Government Applications",
+  "icon": "fa-address-card",
+  "themeColor": "#7c3aed",
+  "bgTint": "#f5f3ff",
+  "folderPath": "assets/module/nic/",
+  "documentationPath": "assets/module/nic/docs/",
+  "targetPage": "assets/module/nic/pages/index.html",
+  "displayOrder": 3,
+  "status": "Published",
+  "permissions": [
+    "admin",
+    "staff"
+  ],
+  "createdDate": "2026-07-28",
+  "updatedDate": "2026-07-28"
+}

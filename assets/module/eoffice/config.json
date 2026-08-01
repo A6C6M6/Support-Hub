@@ -1,0 +1,21 @@
+{
+  "moduleId": "eoffice",
+  "moduleName": "E-OFFICE",
+  "fullName": "Electronic File Management System",
+  "description": "Electronic file movement, note-sheet and correspondence management system.",
+  "category": "Office Systems",
+  "icon": "fa-folder-open",
+  "themeColor": "#ca8a04",
+  "bgTint": "#fefce8",
+  "folderPath": "assets/module/eoffice/",
+  "documentationPath": "assets/module/eoffice/docs/",
+  "targetPage": "assets/module/eoffice/pages/index.html",
+  "displayOrder": 10,
+  "status": "Published",
+  "permissions": [
+    "admin",
+    "staff"
+  ],
+  "createdDate": "2026-07-28",
+  "updatedDate": "2026-07-28"
+}

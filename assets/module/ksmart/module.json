@@ -1,0 +1,8 @@
+{
+  "id": "ksmart",
+  "title": "KSMART",
+  "description": "Core LSGI application covering civil registration, licensing and revenue systems.",
+  "icon": "fa-building-columns",
+  "themeColor": "#2563eb",
+  "bgTint": "#eff6ff"
+}

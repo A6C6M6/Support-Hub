@@ -1,0 +1,21 @@
+{
+  "moduleId": "cences",
+  "moduleName": "CENSUS",
+  "fullName": "Local Body Census & Demographic Data System",
+  "description": "Population and demographic census data collection and reporting for local bodies.",
+  "category": "Department Portals",
+  "icon": "fa-people-group",
+  "themeColor": "#0d9488",
+  "bgTint": "#f0fdfa",
+  "folderPath": "assets/module/cences/",
+  "documentationPath": "assets/module/cences/docs/",
+  "targetPage": "assets/module/cences/pages/index.html",
+  "displayOrder": 7,
+  "status": "Published",
+  "permissions": [
+    "admin",
+    "staff"
+  ],
+  "createdDate": "2026-07-28",
+  "updatedDate": "2026-07-28"
+}

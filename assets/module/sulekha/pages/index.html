@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sulekha Project Revision Support Portal</title>
+    <link rel="icon" type="image/svg+xml" href="../../../../icons/favicon.svg">
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0284c7; /* Sulekha Brand Blue */
+            --primary-dark: #0369a1;
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Manjari', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Top Header Navigation */
+        .portal-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary-color);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .brand-text h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+
+        /* Search Section */
+        .search-hero {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            color: #ffffff;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-hero h1 {
+            font-size: 1.75rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .search-hero p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 650px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Category Filter Pills */
+        .filter-pills {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pill-btn.active, .pill-btn:hover {
+            background: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        /* FAQ Accordions */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .faq-header {
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            background: var(--surface);
+        }
+
+        .faq-header:hover {
+            background: #f1f5f9;
+        }
+
+        .faq-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-num {
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .faq-toggle-icon {
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-card.open .faq-toggle-icon {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.35s ease;
+            padding: 0 22px;
+            background: #fafafa;
+            border-top: 0px solid var(--border-color);
+        }
+
+        .faq-card.open .faq-content {
+            max-height: 1000px;
+            padding: 18px 22px 22px 22px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-content p, .faq-content ul, .faq-content ol {
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        .faq-content ul, .faq-content ol {
+            padding-left: 20px;
+        }
+
+        .faq-content li {
+            margin-bottom: 6px;
+        }
+
+        .alert-box {
+            background: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #9a3412;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .portal-footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 48px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="portal-header">
+        <div class="brand-box">
+            <div class="brand-icon">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <div class="brand-text">
+                <h2>സുലേഖ സപ്പോർട്ട് ഹബ്ബ് (SULEKHA)</h2>
+                <p>വാർഷിക പദ്ധതി റിവിഷൻ മാർഗ്ഗനിർദ്ദേശങ്ങളും പതിവ് ചോദ്യങ്ങളും</p>
+            </div>
+        </div>
+        
+        <!-- Back link to User Dashboard -->
+        <a href="../../../userpage/userpage/page User Dashboard .html" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> ഡാഷ്‌ബോർഡിലേക്ക് മടങ്ങുക
+        </a>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+
+        <!-- Search Bar Hero -->
+        <section class="search-hero">
+            <h1>പ്രോജക്ട് റിവിഷൻ FAQ സെർച്ച് ചെയ്യുക</h1>
+            <p>സ്പിൽ ഓവർ, ഡി.പി.സി അനുമതി, കോമ്പൻസേഷൻ റിപ്പോർട്ട് തുടങ്ങിയവയെക്കുറിച്ചുള്ള സംശയങ്ങൾ ടൈപ്പ് ചെയ്ത് കണ്ടെത്തുക.</p>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="ചോദ്യങ്ങളോ കീവേഡുകളോ തിരയുക (ഉദാഹരണത്തിന്: Spill Over, DPC, Category 50)...">
+            </div>
+        </section>
+
+        <!-- Category Filter Buttons -->
+        <div class="filter-pills">
+            <button class="pill-btn active" data-category="all">എല്ലാ ചോദ്യങ്ങളും</button>
+            <button class="pill-btn" data-category="spillover">Spill Over & Completion</button>
+            <button class="pill-btn" data-category="dpc">DPC & Revision</button>
+            <button class="pill-btn" data-category="finance">Compensation & Grants</button>
+            <button class="pill-btn" data-category="contingency">Contingency & Joint Venture</button>
+        </div>
+
+        <!-- FAQ List Container -->
+        <div class="faq-list" id="faqList">
+
+            <!-- FAQ 1 -->
+            <div class="faq-card" data-category="spillover">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q1</span>
+                        <span>സ്പിൽ ഓവർ പ്രോജക്ടുകൾ ലഭ്യമാക്കുന്നതിന് Completion Report നടപടികൾ എന്തൊക്കെയാണ്?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <p>നിർവഹണ ഉദ്യോഗസ്ഥർ അവരുടെ ലോഗിനിൽ <strong>Projects → Completion Report</strong> മെനുവിലൂടെ താഴെ പറയുന്നവ ചെയ്യേണ്ടതാണ്:</p>
+                    <ul>
+                        <li>പൂർത്തീകരിച്ച പ്രോജക്ടുകൾ തുറന്ന് Completion Date രേഖപ്പെടുത്തി Save ചെയ്യുക.</li>
+                        <li>പൂർത്തീകരിക്കാത്ത പ്രോജക്ടുകളിൽ പൂർത്തീകരണ തീയതി രേഖപ്പെടുത്താതെ Save ചെയ്യുക (ഇവ മാത്രമാണ് Spill Over ആയി ലഭിക്കുക).</li>
+                        <li>എല്ലാ പ്രോജക്ടുകളുടെയും റിപ്പോർട്ടുകൾ നൽകിയ ശേഷം <strong>Report to LB</strong> ക്ലിക്ക് ചെയ്ത് തദ്ദേശഭരണ സ്ഥാപനത്തിലേക്ക് സമർപ്പിക്കുക.</li>
+                    </ul>
+                    <div class="alert-box">
+                        <strong>ശ്രദ്ധിക്കുക:</strong> ഒരു ഉദ്യോഗസ്ഥന് 10 പദ്ധതികൾ ഉണ്ടെങ്കിൽ, 10 പ്രോജക്ടുകൾക്കും റിപ്പോർട്ട് നൽകണം. ഒന്നിൽ പോലും ബാക്കിയുണ്ടായാൽ Spill Over Transfer ഓപ്ഷൻ ലഭ്യമാകില്ല.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-card" data-category="spillover">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q2</span>
+                        <span>Completion Report പൂർത്തിയാക്കിയാൽ മാത്രമേ Project Transfer ചെയ്യാൻ സാധിക്കുമോ?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <p>അതെ. Completion/Non Completion Report എൻട്രിയും Secretary Forward നടപടിയും പൂർത്തിയായ ശേഷം മാത്രമാണ് അടുത്ത പദ്ധതി വർഷത്തിലേക്ക് പ്രോജക്ട് Transfer ചെയ്യാൻ സാധിക്കുക.</p>
+                </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-card" data-category="spillover">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q5</span>
+                        <span>Project Transfer ചെയ്യുമ്പോൾ ലഭിക്കുന്ന മൂന്ന് ഓപ്ഷനുകൾ എന്തൊക്കെയാണ്?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <ul>
+                        <li><strong>(A) No Change:</strong> പദ്ധതിയിൽ മാറ്റമൊന്നുമില്ലെങ്കിൽ ഉപയോഗിക്കുക. മുൻവർഷത്തെ വിവരങ്ങൾ അതേപടി തുടരും.</li>
+                        <li><strong>(B) Need Change:</strong> സർക്കാർ മാനദണ്ഡങ്ങൾക്കനുസരിച്ച് ഭേദഗതികൾ വരുത്തേണ്ട സാഹചര്യത്തിൽ ഇത് തിരഞ്ഞെടുക്കുക.</li>
+                        <li><strong>(C) To Be Dropped:</strong> ഇനി നടപ്പിലാക്കാൻ കഴിയാത്ത പദ്ധതികൾ പൂർണ്ണമായും ഒഴിവാക്കാൻ ഉപയോഗിക്കുക.</li>
+                    </ul>
+                    <div class="alert-box">
+                        <strong>മുന്നറിയിപ്പ്:</strong> To Be Dropped തിരഞ്ഞെടുത്ത് Save ചെയ്താൽ പിന്നീട് ആ പ്രോജക്ട് തിരിച്ചെടുക്കാനോ Spill Over ചെയ്യാനോ സാധിക്കില്ല.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 12 -->
+            <div class="faq-card" data-category="dpc">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q12</span>
+                        <span>സുലേഖയിൽ Revision Enable ആകുന്നതിനുള്ള പ്രാഥമിക നിബന്ധന എന്താണ്?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <p>വാർഷിക പദ്ധതി സമർപ്പിച്ചതിന് ശേഷം, ജില്ലാ ആസൂത്രണ സമിതിയുടെ (DPC) അംഗീകാരം ലഭിച്ച് Proceedings Generate ചെയ്ത് Process Completed ആകണം. അതിന് ശേഷം സെക്രട്ടറിയുടെ ലോഗിനിൽ നിന്ന് <strong>Enable Revision Request</strong> സമർപ്പിച്ച് DPC അത് അംഗീകരിക്കണം.</p>
+                </div>
+            </div>
+
+            <!-- FAQ 15 -->
+            <div class="faq-card" data-category="dpc">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q15</span>
+                        <span>Project Revision / Drop / New Project ഉൾപ്പെടുത്തുന്നതിനുള്ള അപേക്ഷ DPC-യ്ക്ക് എങ്ങനെ സമർപ്പിക്കാം?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <ol>
+                        <li>Secretary Login → Revision → Approved List വഴി പ്രവേശിക്കുക.</li>
+                        <li>DPC അനുമതി ലഭിച്ച ശേഷം Mark for Revision / Drop തിരഞ്ഞെടുക്കുക.</li>
+                        <li>Remarks രേഖപ്പെടുത്തി Forward to DPC സമർപ്പിക്കുക.</li>
+                        <li>പുതിയ പ്രോജക്ടിന് Add New Project ഉപയോഗിക്കുക (മലയാളത്തിൽ പേര് ചേർത്താൽ പിന്നീട് മാറ്റാൻ കഴിയില്ല).</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- FAQ 24 -->
+            <div class="faq-card" data-category="contingency">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q24</span>
+                        <span>കണ്ടിജൻസി (Contingency) ഫണ്ട് വകയിരുത്തൽ പരിധികൾ എന്തൊക്കെയാണ്?</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <p>ദുരന്തങ്ങൾ, അടിയന്തിര മെയിന്റനൻസ് തുടങ്ങിയ പ്രവൃത്തികൾക്ക് DPC യുടെ മുൻകൂർ അനുമതിയില്ലാതെ തുക വകയിരുത്താം:</p>
+                    <ul>
+                        <li><strong>തനത് ഫണ്ട് (Own Fund):</strong> ബാക്കി വരുന്ന തനത് ഫണ്ടിന്റെ പരമാവധി 25% വരെ.</li>
+                        <li><strong>മെയിന്റനൻസ് നോൺ-റോഡ് (Non-Road):</strong> ഗ്രാമ/ബ്ലോക്ക്/മുനിസിപ്പാലിറ്റി - പരമാവധി ₹25 ലക്ഷം, കോർപ്പറേഷൻ - ₹40 ലക്ഷം, ജില്ലാ പഞ്ചായത്ത് - ₹50 ലക്ഷം.</li>
+                        <li><strong>മെയിന്റനൻസ് റോഡ് (Road):</strong> ഗ്രാമപഞ്ചായത്ത് - ₹10 ലക്ഷം, മറ്റുള്ളവ - ₹25 ലക്ഷം, കോർപ്പറേഷൻ - ₹50 ലക്ഷം.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ 31 -->
+            <div class="faq-card" data-category="contingency">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q31</span>
+                        <span>Joint Venture (സംയുക്ത) പദ്ധതികൾ തയ്യാറാക്കുമ്പോൾ ശ്രദ്ധിക്കേണ്ട കാര്യങ്ങൾ</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <p><strong>1. ഫണ്ട് സ്വീകരിക്കുന്ന (Implementing) Local Body:</strong> Sl. No. 19 Project Implementation ശൂന്യമായി ഇടണം. Sl. No. 30 Source of Funds നൽകണം.</p>
+                    <p><strong>2. ഫണ്ട് നൽകുന്ന (Fund Transfer) Local Body:</strong> Sl. No. 19 ൽ ഫണ്ട് സ്വീകരിക്കുന്ന Local Body യുടെ Code നിർബന്ധമായും ചേർക്കണം.</p>
+                </div>
+            </div>
+
+            <!-- FAQ 32 -->
+            <div class="faq-card" data-category="dpc">
+                <div class="faq-header">
+                    <div class="faq-title">
+                        <span class="faq-num">Q32</span>
+                        <span>പ്രോജക്ട് ഡാറ്റാ എൻട്രി സമയത്തെ Category 50 തിരഞ്ഞെടുക്കൽ</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down faq-toggle-icon"></i>
+                </div>
+                <div class="faq-content">
+                    <ul>
+                        <li><strong>50(1):</strong> നൂതന (Innovative) / DLEC പരിശോധന ആവശ്യമായ പ്രോജക്ട്.</li>
+                        <li><strong>50(2):</strong> നിർവഹണ ഉദ്യോഗസ്ഥന്റെ Certificate മാത്രം മതിയായവ.</li>
+                        <li><strong>50(3):</strong> നിർവഹണ ഉദ്യോഗസ്ഥന്റെ മേലുദ്യോഗസ്ഥന്റെ അംഗീകാരം ആവശ്യമായവ.</li>
+                        <li><strong>50(4):</strong> മേലുദ്യോഗസ്ഥന്റെ അംഗീകാരവും Technical Sanction (സാങ്കേതിക അനുമതി) യും ആവശ്യമായ നിർമ്മാണ പ്രവൃത്തികൾ.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="portal-footer">
+        <p>© 2026 Local Body Support Hub | Sulekha Project Revision Help Module</p>
+    </footer>
+
+    <!-- Interactive Search and Filter JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Accordion Toggle
+            const faqCards = document.querySelectorAll('.faq-card');
+            faqCards.forEach(card => {
+                const header = card.querySelector('.faq-header');
+                header.addEventListener('click', () => {
+                    card.classList.toggle('open');
+                });
+            });
+
+            // Live Search Filter
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                faqCards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Category Filter Pills
+            const filterBtns = document.querySelectorAll('.pill-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const category = btn.getAttribute('data-category');
+                    faqCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (category === 'all' || cardCategory === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

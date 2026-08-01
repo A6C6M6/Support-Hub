@@ -1,0 +1,21 @@
+{
+  "moduleId": "ksmart",
+  "moduleName": "KSMART",
+  "fullName": "Kerala Solution for Managing Administrative Reformation and Transformation",
+  "description": "Core LSGI application covering civil registration, licensing and revenue systems.",
+  "category": "Core ERP",
+  "icon": "fa-building-columns",
+  "themeColor": "#2563eb",
+  "bgTint": "#eff6ff",
+  "folderPath": "assets/module/ksmart/",
+  "documentationPath": "assets/module/ksmart/docs/",
+  "targetPage": "assets/module/ksmart/pages/index.html",
+  "displayOrder": 1,
+  "status": "Published",
+  "permissions": [
+    "admin",
+    "staff"
+  ],
+  "createdDate": "2026-07-28",
+  "updatedDate": "2026-07-28"
+}
