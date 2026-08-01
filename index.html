@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Hub - Support & Collaboration Portal</title>
+    
+    <!-- Meta Descriptions & Theme Color -->
+    <meta name="description" content="A comprehensive digital resource hub for offices, providing help guides, software updates, downloadable resources, feedback services, and essential support through a single, unified platform.">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Preconnect & Font Awesome Icons -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <main class="card-container">
+        <!-- Header Branding -->
+        <header class="header-brand">
+            <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+            <span>SUPPORT HUB</span>
+        </header>
+        
+        <!-- Main Title -->
+        <h1 class="main-title">Support &amp; Collaboration Portal</h1>
+
+        <!-- Description Box -->
+        <section class="description-wrapper" aria-labelledby="system-description">
+            <p id="system-description" class="description">
+                A comprehensive digital resource hub for offices, providing help guides, software updates, downloadable resources, feedback services, and essential support through a single, unified platform. Designed to streamline access to essential tools and information, it enhances operational efficiency, ensures consistency, and delivers an improved user experience.
+            </p>
+        </section>
+        
+        <!-- Navigation Buttons Group -->
+        <nav class="button-group" aria-label="Portal Navigation">
+            <button type="button" class="btn btn-primary" data-destination="admin">
+                <i class="fa-solid fa-user-circle" aria-hidden="true"></i> Admin Portal
+            </button>
+            <button type="button" class="btn btn-secondary" data-destination="admin-settings">
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i> Admin Settings
+            </button>
+            <button type="button" class="btn btn-primary" data-destination="user">
+                <i class="fa-solid fa-user-circle" aria-hidden="true"></i> User Portal
+            </button>
+        </nav>
+
+        <!-- Service Badges / Tags -->
+        <div class="tag-container" aria-label="System Features">
+            <button type="button" class="tag"><i class="fa-solid fa-landmark" aria-hidden="true"></i> KSMART</button>
+            <button type="button" class="tag"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> SPARK</button>
+            <button type="button" class="tag"><i class="fa-solid fa-desktop" aria-hidden="true"></i> NIC</button>
+            <button type="button" class="tag"><i class="fa-solid fa-users" aria-hidden="true"></i> CML</button>
+            <button type="button" class="tag"><i class="fa-solid fa-square-check" aria-hidden="true"></i> ELECTION</button>
+            <button type="button" class="tag"><i class="fa-solid fa-people-group" aria-hidden="true"></i> CENSUS</button>
+            <button type="button" class="tag"><i class="fa-solid fa-language" aria-hidden="true"></i> MALAYALAM</button>
+            <button type="button" class="tag"><i class="fa-solid fa-file-word" aria-hidden="true"></i> WORD</button>
+        </div>
+    </main>
+
+    <!-- Navigation Logic Script -->
+    <script src="index.js" defer></script>
+</body>
+</html>
