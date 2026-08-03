@@ -28,7 +28,6 @@
             --badge-red: #ef4444;
         }
 
-        /* Dark Mode Preferences */
         body.dark-mode {
             --secondary-bg: #0f172a;
             --text-dark: #f8fafc;
@@ -82,21 +81,58 @@
             width: calc(var(--sidebar-width) - 20px);
         }
 
+        /* Requirement 2: Support Hub Logo & Image Upload Area */
         .brand-container {
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            position: relative;
         }
 
-        .brand-logo {
-            width: 34px;
-            height: 34px;
+        .brand-logo-wrapper {
+            position: relative;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .brand-logo-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .brand-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-logo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            color: #ffffff;
+            font-size: 0.75rem;
+        }
+
+        .brand-logo-wrapper:hover .brand-logo-overlay {
+            opacity: 1;
+        }
+
+        #supportHubImageInput {
+            display: none;
         }
 
         .brand-title {
@@ -225,35 +261,45 @@
             cursor: pointer;
         }
 
+        /* Requirement 1: Profile Section Expanded Clickable Card Area */
         .profile-widget { position: relative; }
 
         .profile-button {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.65rem;
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.2rem 0.65rem 0.2rem 0.25rem;
+            padding: 0.3rem 0.75rem 0.3rem 0.3rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: background 0.2s;
+            user-select: none;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .profile-button:hover, .profile-button:focus {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .user-avatar-img {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             object-fit: cover;
+            pointer-events: none;
         }
 
         .user-info-text {
             display: flex;
             flex-direction: column;
             text-align: left;
+            pointer-events: none;
         }
 
         .user-name-label {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 700;
             color: #ffffff;
             line-height: 1.1;
@@ -261,7 +307,18 @@
 
         .user-role-label {
             font-size: 0.68rem;
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .profile-arrow-icon {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            transition: transform 0.2s ease;
+        }
+
+        .profile-button.open .profile-arrow-icon {
+            transform: rotate(180deg);
         }
 
         .profile-dropdown-menu {
@@ -369,14 +426,12 @@
             background-color: rgba(255, 255, 255, 0.12);
         }
 
-        /* Pill Active Highlight Matching Reference Image */
         .sidebar-menu li.active a {
             background-color: var(--active-pill-blue);
             color: #ffffff;
             font-weight: 600;
         }
 
-        /* Support Card Component */
         .support-card {
             margin-top: auto;
             margin-left: 0.75rem;
@@ -420,7 +475,6 @@
 
         .btn-support:hover { background-color: #f8fafc; }
 
-        /* ------------------ CONTENT AREA & BREADCRUMB ------------------ */
         .content-wrapper {
             flex-grow: 1;
             padding: 1.25rem 2rem;
@@ -459,21 +513,23 @@
             font-size: 0.9rem;
             color: var(--text-muted);
         }
-
-        /* Modal Backdrop */
-        .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
-        .modal { background: white; border-radius: 12px; width: 100%; max-width: 480px; padding: 2rem; }
     </style>
 </head>
 <body>
 
-    <!-- Header Section Matching Reference Image -->
+    <!-- Header Section -->
     <header class="header">
         <div class="header-left">
             <div class="brand-container">
-                <div class="brand-logo">
-                    <i class="fa-solid fa-user-tie" style="color: #0b4fb3; font-size: 1.1rem;"></i>
+                <!-- Requirement 2: Interactive Uploadable Logo -->
+                <div class="brand-logo-wrapper" onclick="triggerSupportHubImageUpload()" title="Click to upload/change logo">
+                    <img id="supportHubLogoImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230b4fb3'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>" alt="Support Hub Logo" class="brand-logo-img">
+                    <div class="brand-logo-overlay">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
                 </div>
+                <input type="file" id="supportHubImageInput" accept="image/jpeg, image/jpg, image/png, image/webp" onchange="handleSupportHubImageUpload(event)">
+                
                 <span class="brand-title">Support Hub</span>
             </div>
             <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
@@ -504,14 +560,15 @@
                 <i class="fa-regular fa-moon" id="themeIcon"></i>
             </button>
 
+            <!-- Requirement 1: Full Profile Card Area Clickable Toggle with Keyboard Accessibility -->
             <div class="profile-widget">
-                <div class="profile-button" onclick="toggleProfileMenu()">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="user-avatar-img">
+                <div class="profile-button" id="profileCardBtn" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" onclick="toggleProfileMenu(event)" onkeydown="handleProfileKeydown(event)">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="User Avatar" class="user-avatar-img">
                     <div class="user-info-text">
                         <span class="user-name-label">Sreejith K</span>
                         <span class="user-role-label">Assistant Engineer</span>
                     </div>
-                    <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: rgba(255,255,255,0.8);"></i>
+                    <i class="fa-solid fa-chevron-down profile-arrow-icon"></i>
                 </div>
 
                 <div class="profile-dropdown-menu" id="profileDropdown">
@@ -554,7 +611,7 @@
             </div>
         </aside>
 
-        <!-- Main Content Section -->
+        <!-- Content Area -->
         <main class="content-wrapper" id="mainContent">
             <div class="breadcrumb">
                 <i class="fa-solid fa-chevron-right"></i>
@@ -576,7 +633,76 @@
         const SUPABASE_KEY = 'sb_publishable_dLXC9Vp7BaBxYRz153pq0Q_b1qWG4xV';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Menu Click Routing Logic
+        // REQUIREMENT 1: Enhanced Profile Dropdown Click & Keyboard Toggle
+        function toggleProfileMenu(e) {
+            if (e) e.stopPropagation();
+            const btn = document.getElementById('profileCardBtn');
+            const menu = document.getElementById('profileDropdown');
+            const isOpen = menu.classList.contains('show');
+
+            if (isOpen) {
+                menu.classList.remove('show');
+                btn.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            } else {
+                menu.classList.add('show');
+                btn.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function handleProfileKeydown(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleProfileMenu(e);
+            }
+        }
+
+        // Close Profile Menu on Outside Click
+        document.addEventListener('click', function(e) {
+            const widget = document.querySelector('.profile-widget');
+            const menu = document.getElementById('profileDropdown');
+            const btn = document.getElementById('profileCardBtn');
+            if (widget && !widget.contains(e.target)) {
+                menu.classList.remove('show');
+                btn.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // REQUIREMENT 2: Support Hub Image Upload, Preview & Persistence Logic
+        function triggerSupportHubImageUpload() {
+            document.getElementById('supportHubImageInput').click();
+        }
+
+        function handleSupportHubImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Invalid File Format! Please select JPG, JPEG, PNG, or WEBP image.');
+                event.target.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgData = e.target.result;
+                document.getElementById('supportHubLogoImg').src = imgData;
+                localStorage.setItem('support_hub_custom_logo', imgData);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadSavedSupportHubLogo() {
+            const savedLogo = localStorage.getItem('support_hub_custom_logo');
+            if (savedLogo) {
+                document.getElementById('supportHubLogoImg').src = savedLogo;
+            }
+        }
+
+        // Sidebar Menu Click Handlers
         document.querySelectorAll('#sidebarMenu li').forEach(li => {
             li.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -615,10 +741,6 @@
             document.getElementById('themeIcon').className = isDark ? 'fa-solid fa-sun' : 'fa-regular fa-moon';
         }
 
-        function toggleProfileMenu() {
-            document.getElementById('profileDropdown').classList.toggle('show');
-        }
-
         function handleContactSupport() {
             document.querySelectorAll('#sidebarMenu li').forEach(item => item.classList.remove('active'));
             const contactItem = document.querySelector('#sidebarMenu li[data-page="Contact Support"]');
@@ -628,14 +750,7 @@
             document.getElementById('cardSubTitle').innerText = 'Page content for Contact Support.';
         }
 
-        document.addEventListener('click', function(e) {
-            const widget = document.querySelector('.profile-widget');
-            if(widget && !widget.contains(e.target)) {
-                document.getElementById('profileDropdown').classList.remove('show');
-            }
-        });
-
-        /* Robust Logout Functionality */
+        // Universal Safe Root Logout Path Resolver
         async function handleLogout(event) {
             if (event) event.preventDefault();
 
@@ -673,6 +788,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadSavedSupportHubLogo();
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-mode');
