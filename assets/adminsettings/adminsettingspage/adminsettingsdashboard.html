@@ -22,8 +22,8 @@
             --card-border: #e2e8f0;
             --text-dark: #1e293b;
             --text-muted: #64748b;
-            --header-height: 64px;
-            --sidebar-width: 250px;
+            --header-height: 60px;
+            --sidebar-width: 260px;
             --sidebar-collapsed-width: 70px;
             --badge-red: #ef4444;
         }
@@ -36,7 +36,7 @@
             --card-border: #334155;
         }
 
-        body.dark-mode .module-card, 
+        body.dark-mode .dashboard-card,
         body.dark-mode .modal {
             background-color: #1e293b;
             border-color: #334155;
@@ -59,161 +59,38 @@
             transition: background-color 0.3s ease;
         }
 
-        /* ------------------ LEFT SIDEBAR STYLING ------------------ */
-        .sidebar {
-            width: var(--sidebar-width);
-            background-color: var(--sidebar-bg);
-            display: flex;
-            flex-direction: column;
-            z-index: 900;
-            padding-right: 0.8rem;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .sidebar.collapsed {
-            width: var(--sidebar-collapsed-width);
-            padding-right: 0.4rem;
-        }
-
-        .sidebar.collapsed .sidebar-menu a span,
-        .sidebar.collapsed .support-card {
-            display: none !important;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-
-        .sidebar-menu li a {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            padding: 0.65rem 1rem;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border-top-right-radius: 25px;
-            border-bottom-right-radius: 25px;
-        }
-
-        .sidebar-menu li a i {
-            font-size: 1.1rem;
-            width: 22px;
-            text-align: center;
-        }
-
-        .sidebar-menu li a:hover {
-            background-color: rgba(255, 255, 255, 0.12);
-        }
-
-        /* Pill Active Highlight Matching Reference UI */
-        .sidebar-menu li.active a {
-            background-color: var(--active-pill-blue);
-            color: #ffffff;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Support Card Component */
-        .support-card {
-            margin-top: auto;
-            margin-left: 0.75rem;
-            margin-right: 0.25rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 16px;
-            padding: 1.1rem;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .support-card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .support-card-header i { font-size: 1.2rem; }
-
-        .support-card-subtitle {
-            font-size: 0.82rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.2;
-        }
-
-        .btn-support {
-            background-color: #ffffff;
-            color: var(--brand-blue);
-            border: none;
-            border-radius: 8px;
-            padding: 0.55rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 0.3rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-support:hover {
-            background-color: #f8fafc;
-            transform: translateY(-1px);
-        }
-
-        /* ------------------ HEADER SECTION STYLING ------------------ */
-        .main-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
+        /* ------------------ HEADER SECTION ------------------ */
         .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             height: var(--header-height);
             background-color: var(--brand-blue);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 1.25rem;
             color: #ffffff;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
+            width: calc(var(--sidebar-width) - 20px);
         }
 
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
         }
 
         .brand-logo {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             background: #ffffff;
             display: flex;
@@ -223,10 +100,9 @@
         }
 
         .brand-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: -0.01em;
             white-space: nowrap;
         }
 
@@ -234,22 +110,23 @@
             background: rgba(255, 255, 255, 0.15);
             border: none;
             color: #ffffff;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: background 0.2s ease;
+            margin-left: 0.25rem;
         }
 
         .sidebar-toggle-btn:hover { background: rgba(255, 255, 255, 0.25); }
 
         .header-center {
             flex: 1;
-            max-width: 480px;
-            margin: 0 1.5rem;
+            max-width: 520px;
+            margin: 0 1rem;
         }
 
         .search-box-wrapper {
@@ -259,28 +136,28 @@
 
         .search-box-wrapper i {
             position: absolute;
-            left: 1rem;
+            left: 1.1rem;
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .search-input {
             width: 100%;
-            padding: 0.55rem 1rem 0.55rem 2.6rem;
-            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem 0.5rem 2.6rem;
+            background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             color: #ffffff;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.2s ease;
         }
 
         .search-input::placeholder { color: rgba(255, 255, 255, 0.65); }
         .search-input:focus {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
         }
 
@@ -294,8 +171,8 @@
             position: relative;
             background: rgba(255, 255, 255, 0.15);
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             color: #ffffff;
             display: flex;
@@ -313,25 +190,24 @@
             right: -2px;
             background: var(--badge-red);
             color: white;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            min-width: 17px;
-            height: 17px;
+            min-width: 16px;
+            height: 16px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 4px;
-            border: 2px solid var(--brand-blue);
+            padding: 0 3px;
         }
 
         .lang-selector-btn {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
-            padding: 0.45rem 0.85rem;
+            padding: 0.38rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -340,14 +216,12 @@
             transition: all 0.2s;
         }
 
-        .lang-selector-btn:hover { background: rgba(255, 255, 255, 0.25); }
-
         .theme-toggle-btn {
             background: transparent;
             border: none;
             color: #ffffff;
-            font-size: 1.1rem;
-            padding: 0.5rem;
+            font-size: 1.05rem;
+            padding: 0.4rem;
             cursor: pointer;
         }
 
@@ -356,20 +230,18 @@
         .profile-button {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.25rem 0.75rem 0.25rem 0.3rem;
+            padding: 0.2rem 0.65rem 0.2rem 0.25rem;
             border-radius: 30px;
             cursor: pointer;
             transition: background 0.2s;
         }
 
-        .profile-button:hover { background: rgba(255, 255, 255, 0.22); }
-
         .user-avatar-img {
-            width: 34px;
-            height: 34px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -381,24 +253,24 @@
         }
 
         .user-name-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #ffffff;
             line-height: 1.1;
         }
 
         .user-role-label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: rgba(255, 255, 255, 0.75);
         }
 
         .profile-dropdown-menu {
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 8px);
             right: 0;
             width: 220px;
             background: #ffffff;
-            border-radius: 12px;
+            border-radius: 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 1px solid #e2e8f0;
             display: none;
@@ -410,8 +282,8 @@
         .profile-dropdown-menu.show { display: flex; }
 
         .dropdown-header-title {
-            padding: 0.75rem 1rem;
-            font-size: 0.72rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: #94a3b8;
             text-transform: uppercase;
@@ -424,192 +296,299 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.7rem 1rem;
+            padding: 0.65rem 1rem;
             color: #334155;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .dropdown-item-link:hover { background-color: #f1f5f9; }
+        .dropdown-item-link.logout-link { color: #ef4444; border-top: 1px solid #f1f5f9; }
+
+        /* ------------------ MAIN WRAPPER & SIDEBAR ------------------ */
+        .main-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            padding-top: var(--header-height);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            padding-right: 0.8rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+            padding-right: 0.4rem;
+        }
+
+        .sidebar.collapsed .sidebar-menu a span,
+        .sidebar.collapsed .support-card {
+            display: none !important;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.62rem 1rem;
+            color: #ffffff;
             text-decoration: none;
             font-size: 0.88rem;
             font-weight: 500;
-            transition: background 0.15s;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            transition: all 0.2s ease;
         }
 
-        .dropdown-item-link i { font-size: 0.95rem; width: 18px; color: #64748b; }
-        .dropdown-item-link:hover { background-color: #f1f5f9; color: #0f172a; }
-
-        .dropdown-item-link.logout-link {
-            color: #ef4444;
-            border-top: 1px solid #f1f5f9;
+        .sidebar-menu li a i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
         }
-        .dropdown-item-link.logout-link i { color: #ef4444; }
-        .dropdown-item-link.logout-link:hover { background-color: #fef2f2; }
 
-        /* General Layout Elements */
-        .content-body { flex-grow: 1; padding: 2rem; overflow-y: auto; }
-        .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-        .module-card { background: #ffffff; border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
-        .module-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .module-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
-        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .btn-primary { background-color: var(--brand-blue); color: white; }
-        
+        .sidebar-menu li a:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Pill Active Highlight Matching Reference Image */
+        .sidebar-menu li.active a {
+            background-color: var(--active-pill-blue);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Support Card Component */
+        .support-card {
+            margin-top: auto;
+            margin-left: 0.75rem;
+            margin-right: 0.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 1rem;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .support-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .support-card-subtitle {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .btn-support {
+            background-color: #ffffff;
+            color: var(--brand-blue);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 0.2rem;
+            transition: background 0.2s;
+        }
+
+        .btn-support:hover { background-color: #f8fafc; }
+
+        /* ------------------ CONTENT AREA & BREADCRUMB ------------------ */
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 1.25rem 2rem;
+            overflow-y: auto;
+            background-color: var(--secondary-bg);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--brand-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb i { font-size: 0.75rem; }
+
+        .dashboard-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
+        }
+
+        .dashboard-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal Backdrop */
         .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
-        .modal { background: white; border-radius: 12px; width: 100%; max-width: 500px; padding: 2rem; }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-        .form-group input { width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--card-border); }
+        .modal { background: white; border-radius: 12px; width: 100%; max-width: 480px; padding: 2rem; }
     </style>
 </head>
 <body>
 
-    <!-- Left Sidebar Matching Reference Layout -->
-    <aside class="sidebar" id="sidebar">
-        <ul class="sidebar-menu" id="sidebarMenu">
-            <li class="active" data-page="dashboard"><a href="#"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
-            <li data-page="readme"><a href="#"><i class="fa-solid fa-book-open"></i> <span>Read Me / Help</span></a></li>
-            <li data-page="modifications"><a href="#"><i class="fa-solid fa-sliders"></i> <span>Modifications / Updates</span></a></li>
-            <li data-page="datacollection"><a href="#"><i class="fa-solid fa-database"></i> <span>Data Collection</span></a></li>
-            <li data-page="messages"><a href="#"><i class="fa-regular fa-envelope"></i> <span>Common Messages</span></a></li>
-            <li data-page="feedback"><a href="#"><i class="fa-regular fa-comment-dots"></i> <span>Feedback</span></a></li>
-            <li data-page="faq"><a href="#"><i class="fa-regular fa-circle-question"></i> <span>FAQ</span></a></li>
-            <li data-page="downloads"><a href="#"><i class="fa-solid fa-download"></i> <span>Downloads</span></a></li>
-            <li data-page="contact"><a href="#"><i class="fa-solid fa-headset"></i> <span>Contact Support</span></a></li>
-            <li data-page="settings"><a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a></li>
-        </ul>
-
-        <!-- Bottom Support Card -->
-        <div class="support-card">
-            <div class="support-card-header">
-                <i class="fa-solid fa-headset"></i>
-                <span>Need Help?</span>
+    <!-- Header Section Matching Reference Image -->
+    <header class="header">
+        <div class="header-left">
+            <div class="brand-container">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-user-tie" style="color: #0b4fb3; font-size: 1.1rem;"></i>
+                </div>
+                <span class="brand-title">Support Hub</span>
             </div>
-            <div class="support-card-subtitle">Support team ready.</div>
-            <button class="btn-support" onclick="handleContactSupport()">Contact Support</button>
+            <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
-    </aside>
 
-    <div class="main-wrapper">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="header-left">
-                <div class="brand-container">
-                    <div class="brand-logo">
-                        <i class="fa-solid fa-user-tie" style="color: #0b4fb3; font-size: 1.2rem;"></i>
-                    </div>
-                    <span class="brand-title">Support Hub</span>
-                </div>
-                <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-
-            <div class="header-center">
-                <div class="search-box-wrapper">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="menuSearchInput" class="search-input" placeholder="Search menu items..." onkeyup="filterSidebarMenu()">
-                </div>
-            </div>
-
-            <div class="header-right">
-                <button class="notification-btn" id="notificationBtn">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="notif-badge" id="notifBadge">3</span>
-                </button>
-
-                <button class="lang-selector-btn" onclick="toggleLanguage()">
-                    <i class="fa-solid fa-globe"></i>
-                    <span id="currentLangText">English</span>
-                    <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
-                </button>
-
-                <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
-                    <i class="fa-regular fa-moon" id="themeIcon"></i>
-                </button>
-
-                <div class="profile-widget">
-                    <div class="profile-button" onclick="toggleProfileMenu()">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="user-avatar-img">
-                        <div class="user-info-text">
-                            <span class="user-name-label">Sreejith K</span>
-                            <span class="user-role-label">Assistant Engineer</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: rgba(255,255,255,0.8);"></i>
-                    </div>
-
-                    <div class="profile-dropdown-menu" id="profileDropdown">
-                        <div class="dropdown-header-title">MY ACCOUNT</div>
-                        <a href="#" class="dropdown-item-link"><i class="fa-solid fa-user-gear"></i> Profile Settings</a>
-                        <a href="#" class="dropdown-item-link"><i class="fa-regular fa-address-card"></i> Account Settings</a>
-                        <a href="#" class="dropdown-item-link"><i class="fa-solid fa-key"></i> Change Password</a>
-                        <a href="#" class="dropdown-item-link"><i class="fa-solid fa-sliders"></i> Preferences</a>
-                        <a href="#" class="dropdown-item-link logout-link" onclick="handleLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Body Content -->
-        <main class="content-body" id="mainContent"></main>
-    </div>
-
-    <!-- Modal Dialog -->
-    <div class="modal-backdrop" id="addModuleModal">
-        <div class="modal">
-            <h3 style="margin-bottom: 1.5rem;">Add New Module</h3>
-            <div class="form-group">
-                <label>Page Title (Key)</label>
-                <input type="text" id="modPageKey" placeholder="e.g. analytics">
-            </div>
-            <div class="form-group">
-                <label>Module Name (English)</label>
-                <input type="text" id="modNameEn" placeholder="Analytics Dashboard">
-            </div>
-            <div class="form-group">
-                <label>Module Name (Malayalam)</label>
-                <input type="text" id="modNameMl" placeholder="അനലിറ്റിക്സ് ഡാഷ്‌ബോർഡ്">
-            </div>
-            <div class="form-group">
-                <label>Icon Class (FontAwesome)</label>
-                <input type="text" id="modIcon" placeholder="fa-solid fa-chart-line">
-            </div>
-            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                <button class="btn" style="background:#cbd5e1;" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="saveNewModule()">Save Module</button>
+        <div class="header-center">
+            <div class="search-box-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="menuSearchInput" class="search-input" placeholder="Search menu items..." onkeyup="filterSidebarMenu()">
             </div>
         </div>
+
+        <div class="header-right">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notif-badge" id="notifBadge">3</span>
+            </button>
+
+            <button class="lang-selector-btn" onclick="toggleLanguage()">
+                <i class="fa-solid fa-globe"></i>
+                <span id="currentLangText">English</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </button>
+
+            <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fa-regular fa-moon" id="themeIcon"></i>
+            </button>
+
+            <div class="profile-widget">
+                <div class="profile-button" onclick="toggleProfileMenu()">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="user-avatar-img">
+                    <div class="user-info-text">
+                        <span class="user-name-label">Sreejith K</span>
+                        <span class="user-role-label">Assistant Engineer</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: rgba(255,255,255,0.8);"></i>
+                </div>
+
+                <div class="profile-dropdown-menu" id="profileDropdown">
+                    <div class="dropdown-header-title">MY ACCOUNT</div>
+                    <a href="#" class="dropdown-item-link"><i class="fa-solid fa-user-gear"></i> Profile Settings</a>
+                    <a href="#" class="dropdown-item-link"><i class="fa-regular fa-address-card"></i> Account Settings</a>
+                    <a href="#" class="dropdown-item-link"><i class="fa-solid fa-key"></i> Change Password</a>
+                    <a href="#" class="dropdown-item-link"><i class="fa-solid fa-sliders"></i> Preferences</a>
+                    <a href="#" class="dropdown-item-link logout-link" onclick="handleLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <ul class="sidebar-menu" id="sidebarMenu">
+                <li class="active" data-page="Dashboard"><a href="#"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
+                <li data-page="Read Me / Help"><a href="#"><i class="fa-solid fa-book-open"></i> <span>Read Me / Help</span></a></li>
+                <li data-page="Modifications / Updates"><a href="#"><i class="fa-solid fa-sliders"></i> <span>Modifications / Updates</span></a></li>
+                <li data-page="Data Collection"><a href="#"><i class="fa-solid fa-database"></i> <span>Data Collection</span></a></li>
+                <li data-page="Common Messages"><a href="#"><i class="fa-regular fa-envelope"></i> <span>Common Messages</span></a></li>
+                <li data-page="Feedback"><a href="#"><i class="fa-regular fa-comment-dots"></i> <span>Feedback</span></a></li>
+                <li data-page="FAQ"><a href="#"><i class="fa-regular fa-circle-question"></i> <span>FAQ</span></a></li>
+                <li data-page="Downloads"><a href="#"><i class="fa-solid fa-download"></i> <span>Downloads</span></a></li>
+                <li data-page="Contact Support"><a href="#"><i class="fa-solid fa-headset"></i> <span>Contact Support</span></a></li>
+                <li data-page="Settings"><a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a></li>
+            </ul>
+
+            <!-- Need Help Support Card -->
+            <div class="support-card">
+                <div class="support-card-header">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>Need Help?</span>
+                </div>
+                <div class="support-card-subtitle">Support team ready.</div>
+                <button class="btn-support" onclick="handleContactSupport()">Contact Support</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Section -->
+        <main class="content-wrapper" id="mainContent">
+            <div class="breadcrumb">
+                <i class="fa-solid fa-chevron-right"></i>
+                <span id="breadcrumbTitle">Dashboard</span>
+            </div>
+
+            <div class="dashboard-card">
+                <h3 id="cardTitle">Dashboard View</h3>
+                <p id="cardSubTitle">Page content for Dashboard.</p>
+            </div>
+        </main>
     </div>
 
     <script>
-        // System State Handling
         let currentLanguage = localStorage.getItem('lang') || 'en';
-        let activePageKey = 'dashboard';
 
-        // Supabase Client Config
+        // Supabase Initialization
         const SUPABASE_URL = 'https://qhcxxzjibfzjkrpskjjj.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_dLXC9Vp7BaBxYRz153pq0Q_b1qWG4xV';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Sidebar Navigation Binding
+        // Menu Click Routing Logic
         document.querySelectorAll('#sidebarMenu li').forEach(li => {
             li.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelectorAll('#sidebarMenu li').forEach(item => item.classList.remove('active'));
                 this.classList.add('active');
-                activePageKey = this.getAttribute('data-page');
-                loadPageContent(activePageKey);
+                
+                const pageName = this.getAttribute('data-page');
+                document.getElementById('breadcrumbTitle').innerText = pageName;
+                document.getElementById('cardTitle').innerText = `${pageName} View`;
+                document.getElementById('cardSubTitle').innerText = `Page content for ${pageName}.`;
             });
         });
-
-        async function loadPageContent(pageKey) {
-            const mainContent = document.getElementById('mainContent');
-            mainContent.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-                    <h2>${pageKey.toUpperCase()} View</h2>
-                    <button class="btn btn-primary" onclick="openModal()"><i class="fa-solid fa-plus"></i> Add Module</button>
-                </div>
-                <div class="module-card">
-                    <p style="color:var(--text-muted);">Page content and integrated dynamic features for ${pageKey}.</p>
-                </div>
-            `;
-        }
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('collapsed');
@@ -642,9 +621,11 @@
 
         function handleContactSupport() {
             document.querySelectorAll('#sidebarMenu li').forEach(item => item.classList.remove('active'));
-            const contactItem = document.querySelector('#sidebarMenu li[data-page="contact"]');
+            const contactItem = document.querySelector('#sidebarMenu li[data-page="Contact Support"]');
             if (contactItem) contactItem.classList.add('active');
-            loadPageContent('contact');
+            document.getElementById('breadcrumbTitle').innerText = 'Contact Support';
+            document.getElementById('cardTitle').innerText = 'Contact Support View';
+            document.getElementById('cardSubTitle').innerText = 'Page content for Contact Support.';
         }
 
         document.addEventListener('click', function(e) {
@@ -654,7 +635,7 @@
             }
         });
 
-        /* Robust Root Logout Path Resolution */
+        /* Robust Logout Functionality */
         async function handleLogout(event) {
             if (event) event.preventDefault();
 
@@ -691,9 +672,6 @@
             }
         }
 
-        function openModal() { document.getElementById('addModuleModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('addModuleModal').style.display = 'none'; }
-
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
@@ -701,7 +679,6 @@
                 document.getElementById('themeIcon').className = 'fa-solid fa-sun';
             }
             document.getElementById('currentLangText').innerText = currentLanguage === 'en' ? 'English' : 'മലയാളം';
-            loadPageContent('dashboard');
         });
     </script>
 </body>
